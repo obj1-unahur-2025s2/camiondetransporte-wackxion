@@ -9,6 +9,9 @@ method pesoTotal(){
     self.cosas().map({c => c.peso()}).sum() +
     self.tara()
 }
+method pesoDeTodasLasCosasEnELCamionSonPar(){
+    self.cosas().all({c => c.peso().even()})
+}
 
 
 }
