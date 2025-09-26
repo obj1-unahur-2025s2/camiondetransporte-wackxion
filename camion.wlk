@@ -13,7 +13,7 @@ method pesoDeTodasLasCosasEnELCamionSonPar(){
     self.cosas().all({c => c.peso().even()})
 }
 method laPrimerCosaConNivelDePeligro_(nivel) {
-    
+    hola
 }
 
 }
