@@ -48,7 +48,10 @@ method laCosaConMasPesoCargadaSiNoCero() {
         self.cosasCargadas().map({c => c.peso()}).max()
     }else{
         return 0
-    }
+    }}
+    
+method laPrimerCosaConNivelDePeligro_(nivel) {
+    
 }
 
 }
