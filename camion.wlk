@@ -29,23 +29,23 @@ method todasLasCosasConNivelDePeligroMayorAlDado(nivelDado){
 }
 
 method todasLasCosasConNivelDePeligroMayorAUnaCosaDada(cosaDada){
-    self.cosasCargadas().filter({c => c.nivelDePeligro() > cosaDada.nivelDePeligro()})
+    return self.cosasCargadas().filter({c => c.nivelDePeligro() > cosaDada.nivelDePeligro()})
 }
 method elCamionEstaConSobreCarga() {
     return self.pesoTotal() > 2500
 }
 method elCamionPudeCirculrEnRuta(nivelDeRuta) {
-    self.elCamionEstaConSobreCarga() and
+    return self.elCamionEstaConSobreCarga() and
     self.todasLasCosasConNivelDePeligroMayorAlDado(nivelDeRuta).size() > 0
 }
 // agregados al camion
 
 method hayAlgunaCosaQuePeseEntre(unPesoMin, otroPesoMax) {
-    self.cosasCargadas().any({c => c.peso().between(unPesoMin, otroPesoMax)})
+    return self.cosasCargadas().any({c => c.peso().between(unPesoMin, otroPesoMax)})
 }
 method laCosaConMasPesoCargadaSiNoCero() {
-    if(not self.cosasCargadas().map({c => c.peso()}).isEmpty()){
-        self.cosasCargadas().map({c => c.peso()}).max()
+    if(not self.cosasCargadas().isEmpty()){
+        return self.cosasCargadas().max({c => c.peso()})
     }else{
         return 0
     }}   

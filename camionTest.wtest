@@ -19,7 +19,7 @@ describe "test hasta aca" {
   test "probemoos por partes cargamos a bumblebe el unico peso mayor dentro del camion"{
     camion.cargarCosa(bumblebe)// tranformar
     bumblebe.transformar()
-    assert.equals(800, camion.laCosaConMasPesoCargadaSiNoCero())
+    assert.equals(bumblebe, camion.laCosaConMasPesoCargadaSiNoCero())
   }
 
   test "a hora cargamos a la arena con 150kg en total seria 950 kg cargados mas la tara serian 1950 en peso total"{
@@ -72,5 +72,56 @@ describe "test hasta aca" {
     arena.cargarArena(100)
     camion.cargarCosa(bateriaAntiaerea)
     assert.equals(paqueteDeLadrillos, camion.primerCosaConNivelDePeligroSiHay(2) )
+  }
+
+  test "si evaluo la cantidad de cosas cargadas con mayor nivel de peligro de paqueteDeLadrillo daria true"{
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea) 
+    assert.equals([bumblebe],camion.todasLasCosasConNivelDePeligroMayorAUnaCosaDada(paqueteDeLadrillos))
+  }
+
+  test "si pregunto por un nivel de peligro 2 me devolveria paquetes de ladrillo " {
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea) 
+    assert.equals([bumblebe], camion.todasLasCosasConNivelDePeligroMayorAlDado(2)) 
+  }
+
+  test "no puede circular el camion por ruta de nivel 50" {
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea) 
+    assert.notThat(camion.elCamionPudeCirculrEnRuta(50))
+  }
+
+  test "si cargo los mismo hay cosas entre 800 y 100 kg" {
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea) 
+    assert.that(camion.hayAlgunaCosaQuePeseEntre(100, 800))
+  }
+
+  test "la cosa con mas peso cargada es bumblebe" {
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea)
+    assert.equals(bumblebe, camion.laCosaConMasPesoCargadaSiNoCero())
+    
   }
 }
