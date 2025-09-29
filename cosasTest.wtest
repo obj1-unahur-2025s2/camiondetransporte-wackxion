@@ -1,9 +1,36 @@
 import cosas.*
+describe "test hasta aca" {
 
-describe "group of test for cosas" {
-
-  test "first test" {
-    assert.that(true)
+  test "test, paqueteDeLadrillos el peso de 200 ladrillos es 400" {
+    paqueteDeLadrillos.cargarLadrillos(200)
+    assert.equals(400, paqueteDeLadrillos.peso())
   }
 
+  test "bateriaAntiaeres, no esta cargada al principio" {
+    assert.notThat(bateriaAntiaerea.misilesEstanCargados())
+  }
+
+  test "bateriaAntiaerea, cargarla hace que su peso sea 300"{
+    bateriaAntiaerea.cargarMisiles()
+    assert.equals(300, bateriaAntiaerea.peso())
+    assert.that(bateriaAntiaerea.misilesEstanCargados())
+  }
+
+  test "embalajeDeSeguridad, con reciduos radioactivos de 30 kg su peligro se reduce a la mitad"{
+    
+    assert.equals(30, embalajeDeSeguridad.peso())
+    assert.equals(100, embalajeDeSeguridad.nivelDePeligro())
+  }
+
+  test "contenedor portuario, contiene el embalaje con material radioactvo, bateriaAntiaereas y paqueteDeLadrillo su nivel de peligro deberia ser 100"{
+    embalajeDeSeguridad.cambiarCosasAEnvolver(residuosRadiactivos)
+    residuosRadiactivos.cargarReciduos(30)
+    bateriaAntiaerea.cargarMisiles()
+    paqueteDeLadrillos.cargarLadrillos(200)
+    contenedorPortuario.cargarCosaAlContenedor(embalajeDeSeguridad)
+    contenedorPortuario.cargarCosaAlContenedor(bateriaAntiaerea)
+    contenedorPortuario.cargarCosaAlContenedor(paqueteDeLadrillos)
+    assert.equals(100, contenedorPortuario.nivelDePeligro())
+    assert.equals(830, contenedorPortuario.peso())
+  }
 }
