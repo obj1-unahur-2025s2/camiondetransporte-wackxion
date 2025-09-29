@@ -1,9 +1,76 @@
+import cosas.*
 import camion.*
 
-describe "group of test for camion" {
+describe "test hasta aca" {
 
-  test "first test" {
-    assert.that(true)
+  test "test del camión, cargado con lo siguiente: bumblebee como robot, la arena a granel con 150 kilos, la batería antiaérea con los misiles puestos, y el embalaje de seguridad poniéndole como contenido el paquete de ladrillos con 80 ladrillos"{
+    camion.cargarCosa(bumblebe)// tranformar
+    bumblebe.transformar()
+    camion.cargarCosa(arena)// 150kg
+    arena.cargarArena(150)
+    camion.cargarCosa(bateriaAntiaerea)// con misiles cargado
+    bateriaAntiaerea.cargarMisilesODescargarMisiles()
+    camion.cargarCosa(embalajeDeSeguridad) // cargada con ladrillos 80
+    embalajeDeSeguridad.cambiarCosasAEnvolver(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(80)
+    assert.equals(4,camion.cosasCargadas().size())
   }
 
+  test "probemoos por partes cargamos a bumblebe el unico peso mayor dentro del camion"{
+    camion.cargarCosa(bumblebe)// tranformar
+    bumblebe.transformar()
+    assert.equals(800, camion.laCosaConMasPesoCargadaSiNoCero())
+  }
+
+  test "a hora cargamos a la arena con 150kg en total seria 950 kg cargados mas la tara serian 1950 en peso total"{
+    camion.cargarCosa(bumblebe)// tranformar
+    bumblebe.transformar()
+    camion.cargarCosa(arena)// 150kg
+    arena.cargarArena(150)
+    assert.equals(1950, camion.pesoTotal())
+  }
+
+  test "con todo cargado deberia no tener una sobre carga"{
+    camion.cargarCosa(bumblebe)// tranformar 800kg
+    bumblebe.transformar()
+    camion.cargarCosa(arena)// 150kg
+    arena.cargarArena(150)
+    camion.cargarCosa(bateriaAntiaerea)// con misiles cargado 300kg
+    bateriaAntiaerea.cargarMisilesODescargarMisiles()
+    camion.cargarCosa(embalajeDeSeguridad) // cargada con ladrillos 80 160kg
+    embalajeDeSeguridad.cambiarCosasAEnvolver(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(80)
+    assert.notThat(camion.elCamionEstaConSobreCarga())
+    assert.equals(2410, camion.pesoTotal())
+  }
+
+  test"si cargo todo lo anterior, pero la arena cambio a 151kg no todas las cosas cargadas serian par"{
+    camion.cargarCosa(bumblebe)// tranformar 800kg
+    bumblebe.transformar()
+    camion.cargarCosa(arena)// 150kg
+    arena.cargarArena(151)
+    camion.cargarCosa(bateriaAntiaerea)// con misiles cargado 300kg
+    bateriaAntiaerea.cargarMisilesODescargarMisiles()
+    camion.cargarCosa(embalajeDeSeguridad) // cargada con ladrillos 80 160kg
+    embalajeDeSeguridad.cambiarCosasAEnvolver(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(80)
+    assert.notThat(camion.TodasLasCosasEnELCamionSonPar())
+  }
+
+
+  test"si cargo a bumblebe y a knightRider, deve exitir el peso de bumblebe"{
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(knightRider)
+    assert.that(camion.hayAlgunaCosaQuePese(800))
+  }
+
+  test "la primera cosa con nivel de peligro 2 cargando bomblebe, ladrillos, bateriaAerea y arena "{
+    camion.cargarCosa(bumblebe)
+    camion.cargarCosa(paqueteDeLadrillos)
+    paqueteDeLadrillos.cargarLadrillos(100)
+    camion.cargarCosa(arena)
+    arena.cargarArena(100)
+    camion.cargarCosa(bateriaAntiaerea)
+    assert.equals(paqueteDeLadrillos, camion.primerCosaConNivelDePeligroSiHay(2) )
+  }
 }

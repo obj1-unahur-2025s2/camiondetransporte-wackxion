@@ -5,20 +5,17 @@ object knightRider {
 }
 object bumblebe {
     var estaEnModoAuto = true
+    var nivelDePeligro = 15
     method peso() = 800 
-    method nivelDePeligro(){
-        if(self.estaEnModoAuto()){
-            return 15
-        } else {
-            return 30
-        }
-    }
+    method nivelDePeligro() = nivelDePeligro 
     method estaEnModoAuto() = estaEnModoAuto
     method transformar(){
         if(self.estaEnModoAuto()){
             estaEnModoAuto = false
+            nivelDePeligro = 30
         } else {
             estaEnModoAuto = true
+            nivelDePeligro = 15
         }
     } 
 }
@@ -34,7 +31,7 @@ object paqueteDeLadrillos {
 
 object arena {
     var pesoCargado = 0
-    method peso() = 0
+    method peso() = pesoCargado
     method nivelDePeligro() = 1
     method cargarArena(cantidad) {
       pesoCargado = cantidad
@@ -47,15 +44,12 @@ object bateriaAntiaerea {
   method misilesEstanCargados() = misilesEstanCargados
   method peso() = peso
   method nivelDePeligro() = nivelDePeligro
-  method cargarMisiles(){
+  method cargarMisilesODescargarMisiles(){
     if(not self.misilesEstanCargados()){
         peso = 300
         nivelDePeligro = 100
         misilesEstanCargados = true
-    }
-  }
-  method descargarMisiles() {
-    if(self.misilesEstanCargados()){
+    } else{
         peso = 200
         nivelDePeligro = 0
         misilesEstanCargados = false

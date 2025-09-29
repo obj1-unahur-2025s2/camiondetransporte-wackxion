@@ -11,7 +11,7 @@ describe "test hasta aca" {
   }
 
   test "bateriaAntiaerea, cargarla hace que su peso sea 300"{
-    bateriaAntiaerea.cargarMisiles()
+    bateriaAntiaerea.cargarMisilesODescargarMisiles()
     assert.equals(300, bateriaAntiaerea.peso())
     assert.that(bateriaAntiaerea.misilesEstanCargados())
   }
@@ -25,7 +25,7 @@ describe "test hasta aca" {
   test "contenedor portuario, contiene el embalaje con material radioactvo, bateriaAntiaereas y paqueteDeLadrillo su nivel de peligro deberia ser 100"{
     embalajeDeSeguridad.cambiarCosasAEnvolver(residuosRadiactivos)
     residuosRadiactivos.cargarReciduos(30)
-    bateriaAntiaerea.cargarMisiles()
+    bateriaAntiaerea.cargarMisilesODescargarMisiles()
     paqueteDeLadrillos.cargarLadrillos(200)
     contenedorPortuario.cargarCosaAlContenedor(embalajeDeSeguridad)
     contenedorPortuario.cargarCosaAlContenedor(bateriaAntiaerea)

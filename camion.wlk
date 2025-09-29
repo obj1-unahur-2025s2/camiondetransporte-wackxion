@@ -10,19 +10,19 @@ method pesoTotal(){
     return (self.cosasCargadas().map({c => c.peso()}).sum() +
     self.tara())
 }
-method pesoDeTodasLasCosasEnELCamionSonPar(){
-    self.cosasCargadas().all({c => c.peso().even()})
+method TodasLasCosasEnELCamionSonPar(){
+    return self.cosasCargadas().all({c => c.peso().even()})
 }
 method hayAlgunaCosaQuePese(peso){
-    self.cosasCargadas().contains({c => c.peso() == peso}) > 0
+    return self.cosasCargadas().map({c => c.peso()}).contains(peso)
 }
 method todasLasCosasDeNivelDePeligro(nivel){
     return cosasCargadas.filter({c => c.nivelDePeligro() == nivel })
 }
 method primerCosaConNivelDePeligroSiHay(nivel) {
     if( not self.todasLasCosasDeNivelDePeligro(nivel).isEmpty()) {
-        self.todasLasCosasDeNivelDePeligro(nivel).first()
-    }
+        return self.todasLasCosasDeNivelDePeligro(nivel).first()
+    }else{return null} // me marca erro en los test si no tiene return
 }
 method todasLasCosasConNivelDePeligroMayorAlDado(nivelDado){
     return self.cosasCargadas().filter({c => c.nivelDePeligro() > nivelDado})
