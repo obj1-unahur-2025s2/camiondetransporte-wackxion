@@ -48,5 +48,17 @@ method laCosaConMasPesoCargadaSiNoCero() {
         return self.cosasCargadas().max({c => c.peso()})
     }else{
         return 0
-    }}   
+    }
+}  
+
+//parte 2
+
+method bultosTotalesDentroDelCamion(){
+    return self.cosasCargadas().map({c => c.cantidadDeBultos()}).sum()
 }
+
+
+
+} 
+
+
